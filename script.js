@@ -1,25 +1,36 @@
-function createGrid(){
+
+
+
+
+
+
+document.getElementById('size-btn').addEventListener('click', () => {
+    let size = +prompt('Enter a size of grid^_^ (max is 100!!)');
+    
+    
+})
+
    
-    generateDivs()
 
 
 
 
+function generateDivs(size = 16){
+    let screen = document.querySelector(".sketch-screen");
+  for (let i = 0; i < size; i++) {
+    let column = document.createElement("div");
+    column.classList.add("column");
+    for (let j = 1; j <= size; j++) {
+      let row = document.createElement("div");
+      row.classList.add("row");
+      row.style.border = "2px solid black";
+      
+      column.appendChild(row);
+    }
+    screen.appendChild(column);
+  }
 
 }
 
-function generateDivs(num = 5){
-    let root = document.querySelector('#root');
-        for(let i = 0; i < num; i++){
-           
-            let div = document.createElement('div');
-            div.classList.add('item');
-            
-            div.x = (i % 5) * 40;
-            div.y = Math.floor(i / 5) * 40;
-            root.append(div);
-           
-        }
-}
+generateDivs()
 
-createGrid()
