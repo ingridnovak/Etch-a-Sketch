@@ -1,21 +1,25 @@
 
+let flag = false;
 
 
 
-
-
+function chooseSize(){
+  
 document.getElementById('size-btn').addEventListener('click', () => {
+
     let size = +prompt('Enter a size of grid^_^ (max is 100!!)');
-    
+    console.log(size)
+    generateDivs(size)
     
 })
-
+}
    
 
 
 
 
-function generateDivs(size = 16){
+function generateDivs(size){
+    flag = true;
     let screen = document.querySelector(".sketch-screen");
   for (let i = 0; i < size; i++) {
     let column = document.createElement("div");
@@ -32,5 +36,5 @@ function generateDivs(size = 16){
 
 }
 
-generateDivs()
 
+chooseSize()
