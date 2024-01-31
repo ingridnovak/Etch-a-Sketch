@@ -2,23 +2,51 @@
 document.getElementById('size-btn').addEventListener('click', chooseSize);
 
 
-
 function chooseSize(){
 let size = +prompt('Enter a size of grid^_^ (max is 100!!)');
 
 generateDivs(size)
-
-
 }
 
 
-function hoverRow(row){
-  
-  row.addEventListener('mouseover', () => {
-    row.style.backgroundColor = 'black'
+
+
+
+
+function hoverRow(){
+  let rows = document.getElementsByClassName('row');
+  let colorBtn = document.getElementById('color-btn');
+  let blackBtn = document.getElementById('black-btn');
+  let flag = false;
+  let color = 'black';
+
+  colorBtn.addEventListener('click', () => {
+    flag = true;
   })
 
+  blackBtn.addEventListener('click', () => {
+    flag = false;
+   
+  })
+ 
+  for(let row of rows){
   
+    row.addEventListener('mouseover', () => {
+      if(flag){
+        randomColor = Math.floor(Math.random()*16777215).toString(16);
+        color = "#" + randomColor;
+      }else{
+        color = 'black';
+      }
+
+      row.style.backgroundColor = color;
+  
+  })
+
+  }
+
+
+
   
 }
 
@@ -44,13 +72,14 @@ function generateDivs(size = 16){
       let row = document.createElement("div");
       row.classList.add("row");
       row.style.border = "2px solid black";
-      hoverRow(row)
+      
       column.appendChild(row);
     }
     screen.appendChild(column);
   }
 
   clearRow()
+  hoverRow()
 
 
 }
