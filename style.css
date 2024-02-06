@@ -23,6 +23,7 @@
     /* make columns vertical flexboxes */
     display: flex;
     flex-direction: column;
+    
   }
 
 
