@@ -3,9 +3,25 @@ document.getElementById('size-btn').addEventListener('click', chooseSize);
 
 
 function chooseSize(){
-let size = +prompt('Enter a size of grid^_^ (max is 100!!)');
 
-generateDivs(size)
+let size = +prompt('Enter a size of grid^_^ (max is 100!!)');
+while(size === 0 || size >= 100){
+  alert('Enter a number BETWEEN 0 and 100,pls')
+   size = +prompt('Enter a size of grid^_^ (max is 100!!)');
+
+}
+
+console.log(typeof size)
+
+
+if(isNaN(size)){
+  alert('Not a number. Enter number, pls');
+  
+  generateDivs()
+}else{
+  generateDivs(size)
+
+}
 }
 
 
@@ -17,29 +33,67 @@ function hoverRow(){
   let rows = document.getElementsByClassName('row');
   let colorBtn = document.getElementById('color-btn');
   let blackBtn = document.getElementById('black-btn');
-  let flag = false;
+  let shadowBtn = document.getElementById('shadow-btn');
+  let changeColor = false;
+  let shadow = '';
   let color = 'black';
+  let opacity = 0.1;
+
 
   colorBtn.addEventListener('click', () => {
-    flag = true;
-  })
+    changeColor = true;
+    
+  });
 
   blackBtn.addEventListener('click', () => {
-    flag = false;
+    changeColor = false;
+    
    
+  });
+
+  shadowBtn.addEventListener('click', (e) => {
+   
+    if(e.target.value=="ON"){
+      e.target.value ="OFF"
+      shadow=e.target.value;
+       
+    console.log(shadow)
+    }else if(e.target.value=="OFF"){
+      e.target.value = "ON"
+  shadow=e.target.value;
+    console.log(shadow)
+
+}
+
   })
  
   for(let row of rows){
+
+    row.style.opacity = opacity.toString();
   
-    row.addEventListener('mouseover', () => {
-      if(flag){
+    row.addEventListener('mouseover', function rowEff(){
+      if(changeColor){
         randomColor = Math.floor(Math.random()*16777215).toString(16);
         color = "#" + randomColor;
       }else{
         color = 'black';
       }
-
       row.style.backgroundColor = color;
+      
+      if(shadow === 'OFF'){
+      
+      let currentOpacity = Number(row.style.opacity);
+      if(currentOpacity < 1){
+         row.style.opacity = currentOpacity + 0.1;
+      }
+
+
+  
+  }else{
+    row.style.opacity = "1"
+    return;
+  }
+    
   
   })
 
@@ -57,6 +111,7 @@ function clearRow(){
   clear.addEventListener('click', () => {
       for(let row of rows){
       row.style.backgroundColor = "transparent";
+      row.style.opacity = '1';
       }
   })
 }
