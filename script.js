@@ -11,9 +11,6 @@ while(size === 0 || size >= 100){
 
 }
 
-console.log(typeof size)
-
-
 if(isNaN(size)){
   alert('Not a number. Enter number, pls');
   
@@ -25,10 +22,6 @@ if(isNaN(size)){
 }
 
 
-
-
-
-
 function hoverRow(){
   let rows = document.getElementsByClassName('row');
   let colorBtn = document.getElementById('color-btn');
@@ -37,7 +30,7 @@ function hoverRow(){
   let changeColor = false;
   let shadow = '';
   let color = 'black';
-  let opacity = 0.1;
+  // let opacity = 0.1;
 
 
   colorBtn.addEventListener('click', () => {
@@ -69,7 +62,7 @@ function hoverRow(){
  
   for(let row of rows){
 
-    row.style.opacity = opacity.toString();
+    // row.style.opacity = opacity.toString();
   
     row.addEventListener('mouseover', function rowEff(){
       if(changeColor){
@@ -85,23 +78,14 @@ function hoverRow(){
       let currentOpacity = Number(row.style.opacity);
       if(currentOpacity < 1){
          row.style.opacity = currentOpacity + 0.1;
-      }
-
-
-  
-  }else{
-    row.style.opacity = "1"
-    return;
+      }else{
+      row.style.opacity = (currentOpacity/10) + 0.1;
+      console.log(row.style.opacity)
+      return;
   }
-    
-  
+}
   })
-
   }
-
-
-
-  
 }
 
 
@@ -126,7 +110,6 @@ function generateDivs(size = 16){
     for (let j = 1; j <= size; j++) {
       let row = document.createElement("div");
       row.classList.add("row");
-      row.style.border = "2px solid black";
       
       column.appendChild(row);
     }
